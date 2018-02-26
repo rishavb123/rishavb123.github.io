@@ -10,7 +10,7 @@
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         
-        <link href='https://fonts.googleapis.com/css?family=Sofia|Lato:100,300,400,300italic' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300|Sofia|Lato:100,300,400,300italic' rel='stylesheet'>
         
         <link rel="stylesheet" href="../resources/css/style.css" type="text/css">
         
@@ -24,28 +24,23 @@
         
           <div class='admin-login-holder' onclick="$('canvas').addClass('blur')">
               
-              <h1 class='top-header primary'>Cloud Notes</h1>
+              <h1 class='top-header primary'>Admin</h1>
               
-              <h1 class='top-header secondary'>Log in or Sign up</h1>
+              <h1 class='top-header secondary'>Log in</h1>
               
-              <input id="txtEmail" type = "email" placeholder="Email">
+              <input id="adminEmail" type = "email" placeholder="Email">
 
-              <input id="txtPassword" type = "password" placeholder="Password">
+              <input id="adminPassword" type = "password" placeholder="Password">
               
               <span class="warning hide">!</span><span id="error-output"></span>
               
               <div class='auth-buttons'>
                   
-                  <button id="btnLogin" class="btn btn-primary">
+                  <button id="adminLogin" class="btn btn-primary">
                     Log in
-                  </button>
-
-                  <button id="btnSignUp" class="btn btn-secondary">
-                    Sign Up
                   </button>
                   
               </div>
-              
               
               
           </div>
@@ -75,6 +70,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#contact-info">Contact Me</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"  id="adminLogout">Logout</a>
                             </li>
                             
                         </ul>
@@ -313,11 +311,27 @@
             
             </div>        
         
+            <input type="text" id="iframe-entry">
+            <iframe src="index.html" id="iframe"></iframe>
+            
+            <div class="add-admin">
+            
+                <h2>Add Admins</h2>
+
+                <input type="text" id="addAdminName" placeholder="Username">
+                <input type="email" id="addAdminEmail" placeholder="Email">
+
+                <button class='btn btn-primary' id="createAdmin">Create Admin</button>
+            
+            </div>
+            
         </div>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+        <script src="cred.js"></script>
         <script src="../CloudNotes/canvas.js"></script>
         <script src="../vendors/js/jquery.waypoints.min.js"></script>
         <script src="../resources/js/waypoints.js"></script>

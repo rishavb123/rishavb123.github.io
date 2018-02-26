@@ -22,7 +22,7 @@ html,body {
 
 .log-in input {
     font-size: 150%;
-    width: 100%;
+    width: 90%;
     border: none;
     background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
     color: white;

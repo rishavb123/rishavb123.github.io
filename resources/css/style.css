@@ -127,7 +127,7 @@ header {
 /*-----------------------------------Contact Info---------------------------*/
 
 #contact-info {
-    margin-bottom: 50vh;
+    margin-bottom: 5vh;
 }
 
 #contacts {
@@ -169,6 +169,31 @@ header {
     width: 50vw;
     height: 50vh;
     border-radius: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto;
+}
+
+.admin-login-holder input {
+    font-size: 150%;
+    width: 90%;
+    border: none;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    color: white;
+    border-bottom: 1px solid white;
+    margin-bottom: 2%;
+    border-radius: 10px;
+}
+
+.admin-login-holder input::placeholder {
+    color: white;
+}
+
+.admin-login-holder h1 {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.44) ;
 }
 
 .admin-canvas {
@@ -180,6 +205,53 @@ header {
     height: 100vh;
     z-index: -1;
 }
+
+#error-output {
+    color: #ff7157;
+    font-size: 150%;
+    background-color: rgba(0, 0, 0, .7)
+}
+
+.warning {
+    border-radius: 30px;
+    background-color: red;
+    padding-left: 5%;
+    padding-right: 5%;
+    color: yellow;
+    font-size: 150%;
+    margin-right: 2%;
+    display: inline-block;
+}
+
+.add-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4%;
+    background-color: #e5e5e5;
+}
+
+#addAdminEmail, #addAdminName{
+    width: 90vw;
+    margin-bottom: 2%;
+    background: linear-gradient(red, grey);
+    color: white;
+}
+
+#addAdminEmail::placeholder, #addAdminName::placeholder {
+    color: #d1d1d1;
+}
+
+
+
+@media only screen and (max-width: 750px) {
+    .admin-login-holder {
+        width: 90vw;
+        align-self: center;
+    }
+}
+
 /*---------------------------------Other Final ------------------------------------*/
 .unblur {
     transition: filter 1s;
