@@ -8,8 +8,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const iframe = document.getElementById('iframe')
-const iframeText = document.getElementById('iframe-entry')
+const iframe = document.getElementById('admin-iframe')
+const iframeText = document.getElementById('admin-iframe-entry')
 const adminLogin = document.getElementById('adminLogin')
 const adminLogout = document.getElementById('adminLogout')
 const adminEmail = document.getElementById('adminEmail')
@@ -23,7 +23,7 @@ const auth = firebase.auth()
 iframeText.addEventListener('keyup', e => {
     console.log(e.keyCode)
     if(e.keyCode == 13)    
-        iframe.src = "../"+iframeText.value
+        iframe.src = location.href.replace("admin",iframeText.value)
 })
 
 adminLogin.addEventListener('click', e => {

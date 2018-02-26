@@ -243,6 +243,18 @@ header {
     color: #d1d1d1;
 }
 
+#admin-iframe-entry {
+    width: 100vw;
+    height: 10vh;
+}
+
+#admin-iframe {
+    overflow-x: hidden;
+    width: 100vw;
+    height: 90vh;
+    margin: 0;
+}
+
 
 
 @media only screen and (max-width: 750px) {
