@@ -80,6 +80,30 @@ function Character(x, y, color) {
         this.color+=spl[spl.length-1];
     }
     
+    this.stop = function() {
+        this.direction = 0;
+    }
+    
+    this.build = function() {
+        this.stop();
+        
+        switch(this.direction) {
+            case 1:
+                objs.push(new Block(this,this.x-2,y));
+                break;
+            case 2:
+                objs.push(new Block(this,this.x,this.y-2));
+                break;
+            case 3:
+                objs.push(new Block(this,this.x+2,this.y));
+                break;
+            case 4:
+                objs.push(new Block(this,this.x,this.y+2));
+                break;
+        }
+        
+    }
+    
     this.update = function() {
         
         if(this.health<=0)
@@ -165,6 +189,13 @@ function Bullet(sender, x, y, direction) {
         c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100);
 
     }
+    
+}
+
+function Block(sender, x, y) {
+    this.color = sender.color;
+    this.x = x;
+    this.y = y;
     
 }
 
