@@ -196,6 +196,30 @@ function Block(sender, x, y) {
     this.color = sender.color;
     this.x = x;
     this.y = y;
+    this.health = sender.health;
+    
+    this.damage = function() {
+        this.health-=10;
+        let spl = this.color.split(',');
+        spl[3] = (this.health/100.0).toString()+")";
+        this.color = "";
+        for(let x=0;x<spl.length-1;x++) {
+            this.color+=spl[x]+",";
+        }
+        this.color+=spl[spl.length-1];
+    }
+    
+    this.update = function() {
+        this.draw();
+    }
+    
+    this.draw = function() {
+         c.fillStyle = this.color;
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100);
+        
+        c.fillStyle = "rgba(255, 243, 94, 0.44)";
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100);
+    }
     
 }
 
