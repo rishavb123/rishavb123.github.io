@@ -1,6 +1,6 @@
 // Setup
-var canvas = document.querySelector('canvas');
-var c = canvas.getContext('2d');
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
 
 if(innerHeight>innerWidth) {
     canvas.width = innerWidth;	
@@ -11,15 +11,15 @@ if(innerHeight>innerWidth) {
 }
 
 // Variables
-var mouse = {
+let mouse = {
 	x: 0,
     y: 0
 };
 
-var player = new Character(20, 20);
-var objs = [player];
-var angle = 0;
-var turning = 0;
+let player = new Character(20, 20,'rgba(0,0,255,1)');
+let objs = [new Character(80,20,'rgba(255,0,0,1)')];
+let angle = 0;
+let turning = 0;
 
 
 // Event Listeners
@@ -45,7 +45,7 @@ addEventListener('keydown', e => {
         player.attack();
 });
 
-var shakeEvent = new Shake({threshold: 15});
+let shakeEvent = new Shake({threshold: 10});
 shakeEvent.start();
 window.addEventListener('shake', function(){
     turning = 2;
@@ -56,13 +56,35 @@ window.addEventListener('shake', function(){
 function Character(x, y, color) {
     this.x = x;
     this.y = y;
+    this.width = 2;
+    this.height = 2;
     this.direction = 0;
+    this.health = 100;
+    this.color = color;
     
     this.attack = function() {
-        objs.push(new Bullet(this.x+.5,this.y+.5,this.direction));
+        if(this.direction!=0)
+            objs.push(new Bullet(this, this.x+.5,this.y+.5,this.direction));
+        else
+            objs.push(new Bullet(this, this.x+.5,this.y+.5,1));
+    }
+    
+    this.damage = function() {
+        this.health-=10;
+        let spl = this.color.split(',');
+        spl[3] = (this.health/100.0).toString()+")";
+        this.color = "";
+        for(let x=0;x<spl.length-1;x++) {
+            this.color+=spl[x]+",";
+        }
+        this.color+=spl[spl.length-1];
     }
     
     this.update = function() {
+        
+        if(this.health<=0)
+            return false;
+        
         switch(this.direction) {
         
             case 1:
@@ -78,19 +100,40 @@ function Character(x, y, color) {
                 this.y++;
                 break;
                 
-        }   
+        }
+        
+        for(indexe in objs) {
+            obj = objs[indexe];
+            if(obj!=this && (obj.x + obj.width >= this.x && obj.x <= this.x + this.width) && (obj.y + obj.height >= this.y && obj.y <= this.y + this.height))
+            {
+                if(obj instanceof Bullet && obj.sender != this) {
+                    objs.splice(indexe,1);
+                    this.damage();
+                }
+                else if(obj instanceof Character)
+                    this.damage();
+            }
+
+        }
+        
         this.draw();
+        return true;
     }
     
     this.draw = function() {
+       
+         c.fillStyle = this.color;
         c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,2*canvas.width/100,2*canvas.height/100);
     }
 }
 
-function Bullet(x, y, direction) {
+function Bullet(sender, x, y, direction) {
     
+    this.sender = sender
     this.x = x;
     this.y = y;
+    this.width = 1;
+    this.height = 1;
     this.direction = direction;
     
     this.update = function() {
@@ -111,18 +154,24 @@ function Bullet(x, y, direction) {
                 break;
                 
         }
-        
+     
         this.draw();
     }
         
     this.draw = function() {
-        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100)
+       
+        c.fillStyle = this.sender.color;
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100);
 
     }
     
 }
 
-//Animation Loop
+//Game Function
+
+function gameOver() {
+    console.log("Game over u lose");
+}
 
 function animate() {
     requestAnimationFrame(animate);
@@ -136,9 +185,21 @@ function animate() {
     angle = angle%360;
     
     canvas.style.transform = "rotate("+angle+"deg)";
+
+    for(let obj in objs)
+        if(!(objs[obj] instanceof Character))
+            objs[obj].update();
+                
+    if(!player.update())
+        gameOver();
     
-    for(var obj in objs)
-        objs[obj].update();
+    
+    for(let obj in objs)
+        if(objs[obj] instanceof Character)
+            if(!objs[obj].update())
+                objs.splice(obj,1);
+                
+    objs[0].attack();
 }
 
 animate();
