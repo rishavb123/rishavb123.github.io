@@ -129,7 +129,8 @@ function Character(x, y, color) {
 
 function Bullet(sender, x, y, direction) {
     
-    this.sender = sender
+    this.sender = sender;
+    this.color = sender.color;
     this.x = x;
     this.y = y;
     this.width = 1;
@@ -160,7 +161,7 @@ function Bullet(sender, x, y, direction) {
         
     this.draw = function() {
        
-        c.fillStyle = this.sender.color;
+        c.fillStyle = this.color;
         c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100);
 
     }
