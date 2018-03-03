@@ -43,6 +43,8 @@ addEventListener('keydown', e => {
         player.direction = e.keyCode - 36;
     else if(e.keyCode === 32)
         player.attack();
+    else if(e.keyCode === 66)
+        player.build();
 });
 
 let shakeEvent = new Shake({threshold: 10});
@@ -59,6 +61,7 @@ function Character(x, y, color) {
     this.width = 2;
     this.height = 2;
     this.direction = 0;
+    this.lastDirection = 3;
     this.health = 100;
     this.color = color;
     
@@ -66,11 +69,22 @@ function Character(x, y, color) {
         if(this.direction!=0)
             objs.push(new Bullet(this, this.x+.5,this.y+.5,this.direction));
         else
-            objs.push(new Bullet(this, this.x+.5,this.y+.5,1));
+            objs.push(new Bullet(this, this.x+.5,this.y+.5,this.lastDirection));
     }
     
     this.damage = function() {
         this.health-=10;
+        let spl = this.color.split(',');
+        spl[3] = (this.health/100.0).toString()+")";
+        this.color = "";
+        for(let x=0;x<spl.length-1;x++) {
+            this.color+=spl[x]+",";
+        }
+        this.color+=spl[spl.length-1];
+    }
+    
+    this.hurt = function() {
+        this.health--;
         let spl = this.color.split(',');
         spl[3] = (this.health/100.0).toString()+")";
         this.color = "";
@@ -85,11 +99,11 @@ function Character(x, y, color) {
     }
     
     this.build = function() {
-        this.stop();
         
         switch(this.direction) {
+                
             case 1:
-                objs.push(new Block(this,this.x-2,y));
+                objs.push(new Block(this,this.x-2,this.y));
                 break;
             case 2:
                 objs.push(new Block(this,this.x,this.y-2));
@@ -100,15 +114,14 @@ function Character(x, y, color) {
             case 4:
                 objs.push(new Block(this,this.x,this.y+2));
                 break;
+                
         }
+        
+        this.stop();
         
     }
     
-    this.update = function() {
-        
-        if(this.health<=0)
-            return false;
-        
+    this.move = function() {
         switch(this.direction) {
         
             case 1:
@@ -125,20 +138,36 @@ function Character(x, y, color) {
                 break;
                 
         }
+    }
+    
+    this.update = function() {
+        
+        if(this.health<=0)
+            return false;
+        
+        this.move();
         
         for(indexe in objs) {
             obj = objs[indexe];
-            if(obj!=this && (obj.x + obj.width >= this.x && obj.x <= this.x + this.width) && (obj.y + obj.height >= this.y && obj.y <= this.y + this.height))
+            if(obj!=this && (obj.x + obj.width > this.x && obj.x < this.x + this.width) && (obj.y + obj.height > this.y && obj.y < this.y + this.height))
             {
                 if(obj instanceof Bullet && obj.sender != this) {
                     objs.splice(indexe,1);
                     this.damage();
                 }
                 else if(obj instanceof Character)
-                    this.damage();
+                    this.hurt();
+                else if(obj instanceof Block) {
+                    this.direction = (this.direction+1)%4+1;
+                    this.move()
+                    this.stop();
+                }
             }
 
         }
+        
+        if(this.direction!=0)
+            this.lastDirection = this.direction;
         
         this.draw();
         return true;
@@ -148,6 +177,15 @@ function Character(x, y, color) {
        
          c.fillStyle = this.color;
         c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,2*canvas.width/100,2*canvas.height/100);
+    }
+    
+    this.getInfo = function() {
+        return {
+            x: this.x,
+            y: this.y,
+            health: this.health,
+            type: "Character"
+        };
     }
 }
 
@@ -196,6 +234,8 @@ function Block(sender, x, y) {
     this.color = sender.color;
     this.x = x;
     this.y = y;
+    this.width = 2;
+    this.height = 2;
     this.health = sender.health;
     
     this.damage = function() {
@@ -210,15 +250,32 @@ function Block(sender, x, y) {
     }
     
     this.update = function() {
+        
+        if(this.health<0)
+            return false;
+        
+        for(indexe in objs) {
+            obj = objs[indexe];
+            if(obj!=this && (obj.x + obj.width > this.x && obj.x < this.x + this.width) && (obj.y + obj.height > this.y && obj.y < this.y + this.height))
+            {
+                if(obj instanceof Bullet && obj.sender != this) {
+                    objs.splice(indexe,1);
+                    this.damage();
+                }
+            }
+
+        }
+        
         this.draw();
+        return true;
     }
     
     this.draw = function() {
          c.fillStyle = this.color;
-        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100);
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,2*canvas.width/100,2*canvas.height/100);
         
-        c.fillStyle = "rgba(255, 243, 94, 0.44)";
-        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,canvas.width/100,canvas.height/100);
+        c.fillStyle = "rgba(0, 0, 0, 0.2)";
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,2 * canvas.width/100,2 * canvas.height/100);
     }
     
 }
@@ -243,19 +300,39 @@ function animate() {
     canvas.style.transform = "rotate("+angle+"deg)";
 
     for(let obj in objs)
-        if(!(objs[obj] instanceof Character))
-            objs[obj].update();
+        if(!(objs[obj] instanceof Character)) {
+            
+            if(objs[obj] instanceof Block) {
+                
+                if(!objs[obj].update()) {
+                    objs.splice(obj,1);
+                    continue;
+                }
+            }
+            else {
+                objs[obj].update();
+            }
+            if(objs[obj].x>100 || objs[obj].x<0 || objs[obj].y>100 || objs[obj].y<0)
+                objs.splice(obj, 1);
+        }
                 
     if(!player.update())
         gameOver();
+    if(player.x>100 || player.x<0 || player.y>100 || player.y<0)
+        player.hurt();
     
     
     for(let obj in objs)
-        if(objs[obj] instanceof Character)
-            if(!objs[obj].update())
+        if(objs[obj] instanceof Character) {
+            if(!objs[obj].update()) {
                 objs.splice(obj,1);
+                continue;
+            }
+        if(objs[obj].x>100 || objs[obj].x<0 || objs[obj].y>100 || objs[obj].y<0)
+            objs[objs].hurt();
+    }
                 
-    objs[0].attack();
+//    objs[0].attack();
 }
 
 animate();
