@@ -106,6 +106,12 @@ function search() {
 }
 
 document.getElementById('editor').addEventListener('keyup', function() {
+    
+    save()
+    
+})
+
+function save() {
     var edit = document.getElementById('editor')
     var index = edit.dataset.index
     var titleInput = document.getElementById('title-input')
@@ -123,8 +129,7 @@ document.getElementById('editor').addEventListener('keyup', function() {
         "last-edited": time
         
     })
-    
-})
+}
 
 
 function editor(index) {
@@ -148,9 +153,39 @@ function editor(index) {
 function noteDownload() {
     var titleInput = document.getElementById('title-input').value
     var updatedNote = document.getElementById('updated-note').value
-
+    
+    var fileName = (titleInput.split('.').length>1)? titleInput : titleInput+'.txt'
+    
     var blob = new Blob([updatedNote],{type: "text/plain;charset=utf-8"})
-    saveAs(blob,titleInput+".txt")
+    saveAs(blob,fileName)
+}
+
+function noteUpload() {
+    var inpFile = document.getElementById("file");
+    if(inpFile.files[0].type=='text/plain') {
+        var fr = new FileReader()
+        fr.readAsBinaryString(inpFile.files[0])
+        fr.onloadend = e => {
+            var string = e.target.result
+            var titleInput = document.getElementById('title-input')
+            var updatedNote = document.getElementById('updated-note')
+            
+            var t = ''
+            
+            if(inpFile.files[0].name.split('.')[inpFile.files[0].name.split('.').length-1]=='txt') {
+                for(var x=0;x<inpFile.files[0].name.split('.').length-1;x++) {
+                    t+=inpFile.files[0].name.split('.')[x]
+                }
+            } else {
+                t= inpFile.files[0].name
+            }
+            
+            titleInput.value = t
+            updatedNote.value = string
+            
+            save()
+        }
+    }
 }
 
 function noteDelete() {

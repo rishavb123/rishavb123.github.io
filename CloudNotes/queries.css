@@ -27,6 +27,15 @@
     .title-input {
         width: 90%;
     }
+    
+    .note-upload, .upload-btn  {
+        display: none;
+    }
+    
+    .note-delete,.note-download{
+        width: 50%;
+    }
+    
 }
 
 @media only screen and (max-width: 400px) {

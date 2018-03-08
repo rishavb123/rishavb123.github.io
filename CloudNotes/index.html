@@ -73,9 +73,10 @@
             <h1 class='editor-title'><input class='title-input' id="title-input" type='text'><button id='close' onclick="closeEditor()">X</button></h1>
             <span class='editor-last-edited' id='editor-last-edited'></span>
             <textarea id='updated-note'></textarea>
-            <div class="btn-group">
+            <div class="btn-group editor-btn-group">
                 
                 <button class='btn note-download' onclick='noteDownload()'>Download</button>
+                <button class='btn note-upload'><input type="file" id="file"><button onclick="noteUpload()" class="upload-btn btn">Upload</button></button>
                 <button class='btn note-delete' onclick='noteDelete()'>Delete Note</button>
                 
               </div>

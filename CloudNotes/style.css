@@ -270,6 +270,12 @@ html,body {
     padding-left: 1vw;
 }
 
+.editor-btn-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .note-delete {
     background-color: red;
     color: #98b7ce;
@@ -277,6 +283,22 @@ html,body {
     font-size: 120%;
     position: relative;
     bottom: 4vh;
+    width: 25%;
+}
+
+
+.note-upload {
+    position: relative;
+    bottom: 4vh;
+    background-color: #58aaf2;
+    color: #c34885;
+    width: 50%;
+}
+
+.upload-btn {
+    position: relative;
+    bottom: 4vh;
+    background-color: #7da7cb;
 }
 
 .note-download {
@@ -286,6 +308,7 @@ html,body {
     font-size: 120%;
     position: relative;
     bottom: 4vh;
+    width: 25%;
 }
 
 .hide {
