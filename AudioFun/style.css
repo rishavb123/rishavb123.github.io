@@ -35,6 +35,13 @@
     overflow-x:visible
 }
 
+.logged {
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+    height: 5%;
+}
+
 #logger {
     background: linear-gradient(red, blue);
     color: white;
