@@ -272,10 +272,18 @@ html,body {
 
 .note-delete {
     background-color: red;
-    color: yellow;
+    color: #98b7ce;
     border-radius: 10px;
     font-size: 120%;
-    float: right;
+    position: relative;
+    bottom: 4vh;
+}
+
+.note-download {
+    background-color: #0f0;
+    color: #bf2980;
+    border-radius: 10px;
+    font-size: 120%;
     position: relative;
     bottom: 4vh;
 }

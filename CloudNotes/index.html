@@ -73,8 +73,12 @@
             <h1 class='editor-title'><input class='title-input' id="title-input" type='text'><button id='close' onclick="closeEditor()">X</button></h1>
             <span class='editor-last-edited' id='editor-last-edited'></span>
             <textarea id='updated-note'></textarea>
-            <button class='note-delete' onclick='noteDelete()'>Delete Note</button>
-              
+            <div class="btn-group">
+                
+                <button class='btn note-download' onclick='noteDownload()'>Download</button>
+                <button class='btn note-delete' onclick='noteDelete()'>Delete Note</button>
+                
+              </div>
           </div>
           
       </div>
@@ -82,6 +86,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
       <script src="canvas.js"></script>
+      <script src="FileSaver.js"></script>
       <script src="app.js"></script>
       
   </body>

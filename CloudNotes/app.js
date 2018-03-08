@@ -145,6 +145,14 @@ function editor(index) {
     
 }
 
+function noteDownload() {
+    var titleInput = document.getElementById('title-input').value
+    var updatedNote = document.getElementById('updated-note').value
+
+    var blob = new Blob([updatedNote],{type: "text/plain;charset=utf-8"})
+    saveAs(blob,titleInput+".txt")
+}
+
 function noteDelete() {
     var entry = prompt("Are You Sure That You Want To Delete This Note? ")
     if(!isIn(properResponses, entry.toLowerCase().replace(/ /g,'')))
