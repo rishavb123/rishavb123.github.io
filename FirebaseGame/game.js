@@ -17,7 +17,8 @@ let mouse = {
 };
 
 let player = new Character(20, 20,'rgba(0,0,255,1)');
-let objs = [new Character(80,20,'rgba(255,0,0,1)')];
+let enemy = new Character(80,20,'rgba(255,0,0,1)')
+let objs = [];
 let angle = 0;
 let turning = 0;
 
@@ -64,6 +65,24 @@ function Character(x, y, color) {
     this.lastDirection = 3;
     this.health = 100;
     this.color = color;
+    
+    this.getInfo = function() {
+        return {
+            x: this.x,
+            y: this.y,
+            direction: this.direction,
+            lastDirection: this.lastDirection,
+            health: this.health
+        }
+    }
+    
+    this.inpInfo = function(o) {
+        this.x = o.x;
+        this.y = o.y;
+        this.direction = o.direction;
+        this.lastDirection = o.lastDirection;
+        this.health = o.health;
+    }
     
     this.attack = function() {
         if(this.direction!=0)
@@ -320,6 +339,11 @@ function animate() {
         gameOver();
     if(player.x>100 || player.x<0 || player.y>100 || player.y<0)
         player.hurt();
+    
+    if(!enemy.update())
+        gameOver();
+    if(enemy.x>100 || enemy.x<0 || enemy.y>100 || enemy.y<0)
+        enemy.hurt();
     
     
     for(let obj in objs)

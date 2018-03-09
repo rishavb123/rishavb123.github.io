@@ -20,7 +20,6 @@
                 border: 30px solid #ffffff;
                 opacity: .7;
                 transition: transform 1s, opacity 1s, filter 1s;
-                filter: blur(30px);
             }
             
             img:hover {
@@ -41,18 +40,25 @@
     
     
     <body>
-        <img src="image.jpg" alt="Program not running">
+        <img src="image.jpg" id="img" alt="Program not running">
                 
-        <script type="text/javascript" lang="js">
-            <!--
+        <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+            var config = {
+            apiKey: "AIzaSyCYCk2oiYvp27IVXHvWUk4YkgrGA3tw6mI",
+            authDomain: "livecamera-f2816.firebaseapp.com",
+            databaseURL: "https://livecamera-f2816.firebaseio.com",
+            projectId: "livecamera-f2816",
+            storageBucket: "livecamera-f2816.appspot.com",
+            messagingSenderId: "1011564849891"
+            };
+            firebase.initializeApp(config);
             
-            function reload()
-            {
-                location.reload()
-            }
-            setTimeout(100000,reload);
-            
-            -->
+            let dbRef = firebase.database().ref()
+            dbRef.child('data').on('value', snap => {
+                document.getElementById('img').src = 'data:image/jpg;base64,'+snap.val();
+            })
         </script>
         <noscript>This needs javascript for auto reload</noscript>
     </body>
