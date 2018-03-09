@@ -1,0 +1,75 @@
+<html>
+
+    <head>
+    
+        <title>Vocab</title>
+        <style>
+            
+            .word {
+                font-size: 120%;
+                font-weight: bold;
+                color: blue;
+                z-index: -1;
+            }
+            
+            p {
+                margin-right: 2%;
+            }
+            
+            
+        </style>
+        
+    </head>
+
+    <body>
+        
+        <p><span class='word'>acquiesce ( V ) - </span><span class='def'>to assent tacitly; submit or comply silently or without protest; agree; consent</span></p>
+
+        <p><span class='word'>bellicose ( ADJ ) - </span><span class='def'>inclined or eager to fight; aggressively hostile; belligerent; pugnacious</span></p>
+
+        <p><span class='word'>clemency ( N ) - </span><span class='def'>showing compassion or forgiveness in judging or punishing; leniency; mercy</span></p>
+
+        <p><span class='word'>delineate ( V ) - </span><span class='def'>to portray in words; describe or outline with precision</span></p>
+
+        <p><span class='word'>ephemeral (ADJ / N) - </span><span class='def'>lasting a very short time; short-lived; transitory</span></p>
+
+        <p><span class='word'>fallacious ( ADJ ) - </span><span class='def'>logically unsound; deceptive; misleading:</span></p>
+
+        <p><span class='word'>germane ( ADJ ) - </span><span class='def'>closely or significantly related; relevant; pertinent</span></p>
+
+        <p><span class='word'>heresy ( N ) - </span><span class='def'>opinion or doctrine at variance with the accepted doctrine</span></p>
+
+        <p><span class='word'>idiosyncrasy ( N ) - </span><span class='def'>a characteristic, habit, mannerism that is peculiar to an individual</span></p>
+
+        <p><span class='word'>laconic ( ADJ ) - </span><span class='def'>using few words; expressing much in few words; concise</span></p>
+
+        <p><span class='word'>mercenary ( ADJ / N ) - </span><span class='def'>working or acting merely for money or other reward</span></p>
+
+        <p><span class='word'>nefarious ( ADJ ) - </span><span class='def'>extremely wicked or villainous</span></p>
+
+        <p><span class='word'>obtuse ( ADJ ) - </span><span class='def'>not quick or alert in perception, feeling, or intellect; dull</span></p>
+
+        <p><span class='word'>perfunctory ( ADJ ) - </span><span class='def'>performed merely as a routine duty; hasty and superficial</span></p>
+
+        <p><span class='word'>quixotic ( ADJ ) - </span><span class='def'>extravagantly chivalrous or romantic; visionary, impractical</span></p>
+
+        <script>
+        
+            let arr = document.getElementsByClassName('def')
+            let arr2 = document.getElementsByTagName('p')
+            
+            for(let x=0;x<arr.length;x++) {
+                arr2[x].addEventListener('click', e => {
+                    arr[x].style.visibility = (arr[x].style.visibility=="hidden") ? "visible" : "hidden";
+                } )
+                
+                arr2[x].addEventListener('touchstart', e => {
+                    arr[x].style.visibility = (arr[x].style.visibility=="hidden") ? "visible" : "hidden";
+                } )
+            }
+            
+        </script>
+        
+    </body>
+    
+</html>

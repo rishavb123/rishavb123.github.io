@@ -7,6 +7,7 @@ firebase = firebase.FirebaseApplication('https://livecamera-f2816.firebaseio.com
 
 cam = cv2.VideoCapture(0)
 
+#add users to make this distributeable
 
 def getphoto():
     tf, frame = cam.read()
