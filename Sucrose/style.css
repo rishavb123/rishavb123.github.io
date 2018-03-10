@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+}
+
+iframe {
+    width: 50vw;
+    height: 100vh;
+}
+
+.graph {
+    position: absolute;
+    height: 50vh;
+    width: 50vw;
+}
+
+#normal {
+    top: 0;
+}
+
+#bestfit {
+    bottom: 0;
+}
