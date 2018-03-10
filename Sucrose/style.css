@@ -17,12 +17,18 @@ iframe {
     position: absolute;
     height: 50vh;
     width: 50vw;
+    right: 0;
 }
 
 #normal {
     top: 0;
 }
 
-#bestfit {
+#best_fit {
     bottom: 0;
+    top: 50vh;
+}
+
+canvas {
+    background-color: black;
 }
