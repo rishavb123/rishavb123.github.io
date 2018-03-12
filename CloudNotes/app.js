@@ -1,4 +1,4 @@
-var config = {
+let config = {
     apiKey: "AIzaSyCd1dNugLT94SV-uMY086QGoe8f-F7d2rk",
     authDomain: "cloudnotes-rishavb123.firebaseapp.com",
     databaseURL: "https://cloudnotes-rishavb123.firebaseio.com",
@@ -8,12 +8,12 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const txtEmail = document.getElementById('txtEmail')
-const txtPassword = document.getElementById('txtPassword')
-const btnLogin = document.getElementById('btnLogin')
-const btnSignUp = document.getElementById('btnSignUp')
-const btnLogout = document.getElementById('btnLogout')
-const errorOutput = document.getElementById('error-output')
+const txtEmail = document.getElementById('txtEmail');
+const txtPassword = document.getElementById('txtPassword');
+const btnLogin = document.getElementById('btnLogin');
+const btnSignUp = document.getElementById('btnSignUp');
+const btnLogout = document.getElementById('btnLogout');
+const errorOutput = document.getElementById('error-output');
     
 function outputError(e) {
     errorOutput.innerHTML = e.message
@@ -26,80 +26,78 @@ function clearOutput() {
 }
 
 btnLogin.addEventListener('click', e => {
-    const email = txtEmail.value
-    const pass = txtPassword.value
-    const auth = firebase.auth()
+    const email = txtEmail.value;
+    const pass = txtPassword.value;
+    const auth = firebase.auth();
     
-    const promise = auth.signInWithEmailAndPassword(email, pass)
+    const promise = auth.signInWithEmailAndPassword(email, pass);
     promise.then(e => {
-        clearOutput()
+        clearOutput();
     }).catch(e => {
-        outputError(e)
+        outputError(e);
     })
 })
 
 btnSignUp.addEventListener('click', e=> {
-    const email = txtEmail.value
-    const pass = txtPassword.value
-    const auth = firebase.auth()
+    const email = txtEmail.value;
+    const pass = txtPassword.value;
+    const auth = firebase.auth();
     
-    const promise = auth.createUserWithEmailAndPassword(email, pass)
+    const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise.then(e => {
         clearOutput()
     }).then(e => {
-        var user = firebase.auth().currentUser
+        let user = firebase.auth().currentUser
 
         user.sendEmailVerification()
         
     }).catch(e => {
         outputError(e)
-    })
-})
+    });
+});
 
 btnLogout.addEventListener('click', e => {
     firebase.auth().signOut();
-})
+});
 
 firebase.auth().onAuthStateChanged(user => {
     if(user) {
-        $('.log-in').addClass("hide")
-        $('.main-app').removeClass('hide')
-        txtEmail.value = ""
-        txtPassword.value = ""
-        $('canvas').removeClass('blur')
-        app()
+        $('.log-in').addClass("hide");
+        $('.main-app').removeClass('hide');
+        txtEmail.value = "";
+        txtPassword.value = "";
+        $('canvas').removeClass('blur');
+        app();
     }
     else {
-        $('.log-in').removeClass('hide')
-        $('.main-app').addClass('hide')
+        $('.log-in').removeClass('hide');
+        $('.main-app').addClass('hide');
     }
-})
+});
 
 $('body').click(e => {
     if(e.target.tagName=='BODY')
-        $('canvas').removeClass('blur')
-})
+        $('canvas').removeClass('blur');
+});
 
-var dbRef = firebase.database().ref()
-var userRef
-data = []
+let dbRef = firebase.database().ref();
+let userRef;
+data = [];
 
 document.getElementById('search-bar').addEventListener('keyup', function() {
-    
-    search()
-    
-})
+    search();
+});
 
 function search() {
-    var input = document.getElementById('search-bar').value.toLowerCase()
-    var li = document.getElementById('notes').getElementsByTagName('li')
+    let input = document.getElementById('search-bar').value.toLowerCase();
+    let li = document.getElementById('notes').getElementsByTagName('li');
     
-    for(var i=0;i<li.length;i++) {
-        var spans = li[i].getElementsByClassName('inside-list')
+    for(let i=0;i<li.length;i++) {
+        let spans = li[i].getElementsByClassName('inside-list');
         if(spans[0].innerHTML.toLowerCase().indexOf(input)<0&&spans[1].innerHTML.toLowerCase().indexOf(input)<0) {
-            li[i].classList.add('hide')
+            li[i].classList.add('hide');
         } else {
-            li[i].classList.remove('hide')
+            li[i].classList.remove('hide');
         }
                 
     }
@@ -107,20 +105,20 @@ function search() {
 
 document.getElementById('editor').addEventListener('keyup', function() {
     
-    save()
+    save();
     
-})
+});
 
 function save() {
-    var edit = document.getElementById('editor')
-    var index = edit.dataset.index
-    var titleInput = document.getElementById('title-input')
-    var lastEditedArea = document.getElementById('editor-last-edited')
-    var updatedNote = document.getElementById('updated-note')
+    let edit = document.getElementById('editor');
+    let; index = edit.dataset.index;
+    let titleInput = document.getElementById('title-input');
+    let lastEditedArea = document.getElementById('editor-last-edited');
+    let updatedNote = document.getElementById('updated-note');
     
-    var time = curTime()
+    let time = curTime();
     
-    lastEditedArea.innerHTML = time
+    lastEditedArea.innerHTML = time;
     
     userRef.child(index).set({
         
@@ -128,93 +126,93 @@ function save() {
         "note": updatedNote.value.replace(/</g,'&lt;').replace(/>/g,'&gt;'),
         "last-edited": time
         
-    })
+    });
 }
 
 
 function editor(index) {
-    $('.editor-wrapper').removeClass('hide')
-    $('.main-app').addClass('blur')
-    var edit = document.getElementById('editor')
-    edit.dataset.index = String(index)
+    $('.editor-wrapper').removeClass('hide');
+    $('.main-app').addClass('blur');
+    let edit = document.getElementById('editor');
+    edit.dataset.index = String(index);
     
-    var dbData = data[index]
+    let dbData = data[index];
     
-    var titleInput = document.getElementById('title-input')
-    var lastEditedArea = document.getElementById('editor-last-edited')
-    var updatedNote = document.getElementById('updated-note')
+    let titleInput = document.getElementById('title-input');
+    let lastEditedArea = document.getElementById('editor-last-edited');
+    let updatedNote = document.getElementById('updated-note');
 
-    titleInput.value = dbData["title"]
-    lastEditedArea.innerHTML =dbData["last-edited"]
-    updatedNote.value = dbData["note"]
+    titleInput.value = dbData["title"];
+    lastEditedArea.innerHTML =dbData["last-edited"];
+    updatedNote.value = dbData["note"];
     
 }
 
 function noteDownload() {
-    var titleInput = document.getElementById('title-input').value
-    var updatedNote = document.getElementById('updated-note').value
+    let titleInput = document.getElementById('title-input').value;
+    let updatedNote = document.getElementById('updated-note').value;
     
-    var fileName = (titleInput.split('.').length>1)? titleInput : titleInput+'.txt'
+    let fileName = (titleInput.split('.').length>1)? titleInput : titleInput+'.txt';
     
-    var blob = new Blob([updatedNote],{type: "text/plain;charset=utf-8"})
-    saveAs(blob,fileName)
+    let blob = new Blob([updatedNote],{type: "text/plain;charset=utf-8"});
+    saveAs(blob,fileName);
 }
 
 function noteUpload() {
-    var inpFile = document.getElementById("file");
+    let inpFile = document.getElementById("file");
     if(inpFile.files[0].type=='text/plain') {
-        var fr = new FileReader()
-        fr.readAsBinaryString(inpFile.files[0])
+        let fr = new FileReader();
+        fr.readAsBinaryString(inpFile.files[0]);
         fr.onloadend = e => {
-            var string = e.target.result
-            var titleInput = document.getElementById('title-input')
-            var updatedNote = document.getElementById('updated-note')
+            let string = e.target.result;
+            let titleInput = document.getElementById('title-input');
+            let updatedNote = document.getElementById('updated-note');
             
-            var t = ''
+            let t = '';
             
             if(inpFile.files[0].name.split('.')[inpFile.files[0].name.split('.').length-1]=='txt') {
-                for(var x=0;x<inpFile.files[0].name.split('.').length-1;x++) {
-                    t+=inpFile.files[0].name.split('.')[x]
+                for(let x=0;x<inpFile.files[0].name.split('.').length-1;x++) {
+                    t+=inpFile.files[0].name.split('.')[x];
                 }
             } else {
-                t= inpFile.files[0].name
+                t= inpFile.files[0].name;
             }
             
-            titleInput.value = t
-            updatedNote.value = string
+            titleInput.value = t;
+            updatedNote.value = string;
             
-            save()
-        }
+            save();
+        };
     }
 }
 
 function noteDelete() {
-    var entry = prompt("Are You Sure That You Want To Delete This Note? ")
+    let entry = prompt("Are You Sure That You Want To Delete This Note? ");
     if(!isIn(properResponses, entry.toLowerCase().replace(/ /g,'')))
         return;
-    var edit = document.getElementById('editor')
-    var index = parseInt(edit.dataset.index)
-    closeEditor()
-    removeData(index)
+    let edit = document.getElementById('editor');
+    let index = parseInt(edit.dataset.index);
+    closeEditor();
+    removeData(index);
 }
 
 function removeData(index) {
-    for(var x=index;x<data.length-1;x++) {
-        userRef.child(x).set(data[x+1])
+    for(let x=index;x<data.length-1;x++) {
+        userRef.child(x).set(data[x+1]);
     }
-    userRef.child(data.length-1).remove()
+    userRef.child(data.length-1).remove();
 }
 
-var months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-var properResponses = ["yes","totally","yup","ya","imsure","ofcourse","whynot","definitely","gladly","i'msure"]
+let months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+let properResponses = ["yes","totally","yup","ya","imsure","ofcourse","whynot","definitely","gladly","i'msure"];
 
 function closeEditor() {
-    $('.editor-wrapper').addClass('hide')
-    $('.main-app').removeClass('blur')
+    $('.editor-wrapper').addClass('hide');
+    $('.main-app').removeClass('blur');
 }
 
 function isIn(arr, item) {
-    for(var a in arr) {
+    for(let a in arr) {
         if(arr[a]==item)
             return true;
     }
@@ -222,26 +220,26 @@ function isIn(arr, item) {
 }
 
 function curTime() {
-    var d = new Date()
-    return d.getDate()+" "+months[parseInt(d.getMonth())]+" "+d.getFullYear()+" "+String(parseInt(d.getHours()))+":"+String(parseInt(d.getMinutes()))+":"+String(parseInt(d.getSeconds()))+":"+String(parseInt(d.getMilliseconds()))
+    let d = new Date();
+    return d.getDate()+" "+months[parseInt(d.getMonth())]+" "+d.getFullYear()+" "+String(parseInt(d.getHours()))+":"+String(parseInt(d.getMinutes()))+":"+String(parseInt(d.getSeconds()))+":"+String(parseInt(d.getMilliseconds()));
 }
 
 function newNote() {
-    var ni = data.length
+    let ni = data.length;
     userRef.child(ni).set({
         "title": "New Note",
         "note": "Enter Text Here",
         "last-edited": curTime()
-    })
+    });
     
-    editor(data.length-1)
+    editor(data.length-1);
 }
 
 function app() {
     if(firebase.auth().currentUser.emailVerified) {
-        userRef = dbRef.child(firebase.auth().currentUser.uid)
+        userRef = dbRef.child(firebase.auth().currentUser.uid);
         userRef.on('value', function(snap) {
-            data = snap.val()
+            data = snap.val();
             if(data==null) {
                 data = [];
             }
@@ -249,19 +247,19 @@ function app() {
             document.getElementById('notes').innerHTML = '';
             
             for(index in data) {
-                document.getElementById('notes').innerHTML+="<li class='note' onclick = 'editor("+String(index)+")'><h2 class='note-title inside-list'>"+data[index].title+"</h2><pre class='note-content inside-list'>"+data[index].note+"</pre></li>"
+                document.getElementById('notes').innerHTML+="<li class='note' onclick = 'editor("+String(index)+")'><h2 class='note-title inside-list'>"+data[index].title+"</h2><pre class='note-content inside-list'>"+data[index].note+"</pre></li>";
             }
             
-            document.getElementById('notes').innerHTML+="<li class='note' onclick='newNote()'><h2 class='note-title inside-list'>New Note</h2><span class='new-note note-content inside-list'></span></li>"
+            document.getElementById('notes').innerHTML+="<li class='note' onclick='newNote()'><h2 class='note-title inside-list'>New Note</h2><span class='new-note note-content inside-list'></span></li>";
             
             if(document.getElementById('search-bar').value.length!=0) {
-                search()
+                search();
             }
             
         })
-        var innerCode = ""
+        let innerCode = "";
         
     } else {
-        document.getElementById('notes').innerHTML = '<h1 style="color: red;">PLEASE USE A VERIFIED ACCOUNT</h1>'
+        document.getElementById('notes').innerHTML = '<h1 style="color: red;">PLEASE USE A VERIFIED ACCOUNT</h1>';
     }
 }
