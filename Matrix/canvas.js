@@ -611,8 +611,8 @@ function animate() {
             break;
     }
     
-    if(img!=''&&navigator.platform[0]!='i'&&navigator.platform!='Android'&&navigator.platform!='BlackBerry'&&navigator.platform.substring(0,10)!='Linux armv'&&innerWidth>700&&part!='GxirtAME')
-        c.drawImage(img,mouse.x-img.width/2,mouse.y-img.height/2);
+  /*  if(img!=''&&navigator.platform[0]!='i'&&navigator.platform!='Android'&&navigator.platform!='BlackBerry'&&navigator.platform.substring(0,10)!='Linux armv'&&innerWidth>700&&part!='GxirtAME')
+        c.drawImage(img,mouse.x-img.width/2,mouse.y-img.height/2);*/
 
 }
 
