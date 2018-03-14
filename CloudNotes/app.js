@@ -111,7 +111,7 @@ document.getElementById('editor').addEventListener('keyup', function() {
 
 function save() {
     let edit = document.getElementById('editor');
-    let; index = edit.dataset.index;
+    let index = edit.dataset.index;
     let titleInput = document.getElementById('title-input');
     let lastEditedArea = document.getElementById('editor-last-edited');
     let updatedNote = document.getElementById('updated-note');
