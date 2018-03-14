@@ -5,7 +5,7 @@ canvas.height = innerHeight;
 
 var fontsize = 10;
 var font = 'Courier';
-var fullFont = fontsize + "px " + font; 
+var fullFont = fontsize + "px " + font;
 c.font = fullFont;
 var part = 'Matrix';
 
@@ -18,7 +18,7 @@ c.shadowOffsetY = .25*fontsize;
 // Variables
 var mouse = {
 	x: innerWidth / 2,
-	y: innerHeight / 2 
+	y: innerHeight / 2
 };
 
 var word = prompt("Enter Some Text Here","The Matrix Game");
@@ -56,7 +56,7 @@ addEventListener('touchmove',function(event){
 });
 addEventListener('touchend',endTouch);
 addEventListener('tap',function(){
-    
+
 });
 
 addEventListener('keydown',function(event){
@@ -69,7 +69,7 @@ addEventListener('keydown',function(event){
             if(direction!='left')
                 direction='right';
             break;
-        case 37: 
+        case 37:
             if(direction!='right')
                 direction='left';
             break;
@@ -110,7 +110,7 @@ function endTouch(event)
                 if(direction!='left')
                     direction='right';
                 else {
-                    
+
                 }
             else if(direction!='right'){
                 direction='left';
@@ -121,7 +121,7 @@ function endTouch(event)
                 if(direction!='up')
                     direction='down';
                 else {
-                    
+
                 }
             else if(direction!='down'){
                 direction='up';
@@ -161,14 +161,14 @@ function CharObj(char, x, y, dx, dy, /*d0, */ color) {
 //    this.theta = 0;
     if(randInt(0,1)==1)
         this.gravity = -5;
-    else   
+    else
         this.gravity = 5;
     this.color = color;
     this.conservedEnergy = .85;
 
 	this.update = function() {
-        
-        
+
+
         if((this.x<=0||this.x+fontsize>=innerWidth)&&part!='GxirtAMETransition')
             this.dx*=-1;
         if(this.y+fontsize+this.dy > canvas.height-boundries||this.y+this.dy<boundries)
@@ -179,23 +179,23 @@ function CharObj(char, x, y, dx, dy, /*d0, */ color) {
         else {
             this.dy+=this.gravity;
         }
-            
-        
+
+
         this.y+=this.dy;
         this.x+=this.dx;
 		this.draw();
 	};
-    
+
     this.changeCharRandomly = function() {
         if(randInt(0,200)==1)
             this.char = randomChar();
     }
-    
+
 	this.draw = function() {
         c.shadowColor = this.color;
         c.font = fullFont;
 //        c.rotate(this.theta);
-		c.fillStyle = this.color;     
+		c.fillStyle = this.color;
         c.fillText(this.char,this.x,this.y)
 //        c.rotate(-this.theta);
         c.shadowColor = 'rgb(0,255,0)';
@@ -211,7 +211,7 @@ function String(x,y,opacity) {
     this.charArray = [];
     this.ending = false;
     this.stopped = false;
-    
+
     this.update = function() {
         if(!this.stopped)
         {
@@ -229,7 +229,7 @@ function String(x,y,opacity) {
         this.changeChars();
         this.draw();
     }
-    
+
     this.getChars = function() {
         allChars = [];
         char_posY = [];
@@ -237,7 +237,7 @@ function String(x,y,opacity) {
         {
             char_posY.push(this.y+i*fontsize)
         }
-        
+
         for(var i=0;i<this.charArray.length;i++)
         {
             var dyForChar = randInt(-4,4);
@@ -245,41 +245,41 @@ function String(x,y,opacity) {
                 dyForChar = randInt(-4,4);
             allChars.push(new CharObj(this.charArray[i],this.x,char_posY[i],randInt(-3,3),dyForChar,'rgba(0,255,0,'+this.opacity+')'));
         }
-        return allChars;  
+        return allChars;
     }
-    
+
     this.changeChars = function()
     {
         for(var x=0;x<this.charArray.length;x++)
             if(randInt(0,200)==1)
                 this.charArray[x] = randomChar();
     }
-    
+
     this.append = function() {
         var char = randomChar();
         this.charArray.push(char[0]);
     }
-    
+
     this.end = function() {
         var tempArray = [];
         for(var x=1;x<this.charArray.length;x++)
         {
             tempArray.push(this.charArray[x]);
         }
-        
+
         this.charArray = tempArray;
         this.y+=fontsize;
     }
-    
+
     this.draw = function() {
         c.font = fullFont;
         c.fillStyle = 'rgba(0,255,0,'+this.opacity+')'
         //c.rotate(Math.PI);
         for(var x=0;x<this.charArray.length;x++)
         {
-            
+
            if(x==this.charArray.length-1&&!this.stopped)
-                c.fillStyle = '#fff';     
+                c.fillStyle = '#fff';
             c.fillText(this.charArray[x],this.x,this.y+x*fontsize)
         }
         //c.rotate(-Math.PI);
@@ -335,7 +335,7 @@ function Snake(x,y,dx,dy,startingChar)
             youLose();
         this.draw();
     }
-    
+
     this.add = function(charobj) {
         var arr = this.charArray;
         charobj.x = arr[arr.length-1].x;
@@ -354,22 +354,22 @@ function Snake(x,y,dx,dy,startingChar)
                     break;
                 default: charobj.x = arr[arr.length-1].x-10;
                     break;
-                    
+
             }
         }
         else if(arr[arr.length-1].x==arr[arr.length-2].x)
             charobj.y = arr[arr.length-1].y*2-arr[arr.length-2].y;
         else
             charobj.x = arr[arr.length-1].x*2-arr[arr.length-2].x;
-        
+
         this.charArray.push(charobj);
     }
-    
+
     this.draw = function() {
         for(var x=0;x<this.charArray.length;x++)
             this.charArray[x].draw();
     }
-    
+
 }
 
 // Implementation
@@ -442,10 +442,10 @@ function stringsToChars() {
 
 function eatApple() {
     apple.color = 'rgba(0,255,0,1)';
-    
+
     for(var x=0;x<3;x++)
     {
-        var temp = new CharObj(); 
+        var temp = new CharObj();
         Object.assign(temp,apple);
         snake.add(temp);
     }
@@ -473,11 +473,11 @@ window.onload = function(){
 
 // Animation Loop
 function animate() {
-    
+
     if(part!='GxirtAME')
         requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height);
- 
+
     switch(part)
     {
         case 'Matrix':
@@ -534,12 +534,12 @@ function animate() {
                 c.shadowOffsetX = .25*wordFontsize;
                 c.shadowOffsetY = .25*wordFontsize;
 
-                var leaving = false;            
+                var leaving = false;
                 if(wordFontsize==fontsize&&count>100)
                     leaving = true;
                 var interval = innerWidth/word.length;
                 for(var x=0;x<word.length;x++)
-                {    
+                {
                     c.fillText(word[x],x*interval+.5*interval-.35*wordFontsize,innerHeight/2+.35*wordFontsize)
                     if(leaving)
                     {
@@ -580,7 +580,7 @@ function animate() {
             else if(chars.length==0)
             {
                 part = 'GxirtAME'
-                
+
             }
             for(var x=0;x<chars.length;x++)
             {
@@ -593,7 +593,7 @@ function animate() {
                 }
             }
             break;
-            
+
         case 'GxirtAME':
             delay = 150-snake.charArray.length;
             if(delay<0)
@@ -610,7 +610,7 @@ function animate() {
             setTimeout(animate,delay);
             break;
     }
-    
+
 //    if(img!=''&&navigator.platform[0]!='i'&&navigator.platform!='Android'&&navigator.platform!='BlackBerry'&&navigator.platform.substring(0,10)!='Linux armv'&&innerWidth>700&&part!='GxirtAME')
 //        c.drawImage(img,mouse.x-img.width/2,mouse.y-img.height/2);
 
