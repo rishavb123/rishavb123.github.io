@@ -1,0 +1,39 @@
+.content {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+iframe {
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+}
+
+#css-input {
+    width: 50%;
+    height: 40%;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    background-color: black;
+    color: #00ff00;
+}
+
+.css-input::placeholder {
+    color: #6c806c;
+}
+
+button {
+    position:absolute;
+    top: 65%;
+    left: 25%;
+    width: 50%;
+    height: 10%;
+    border-radius: 5%;
+    background-color: blue;
+    color: red;
+}
