@@ -11,11 +11,14 @@ iframe {
     position: absolute;
     top: 25vh;
     left: 25vw;
+    width: 50%;
+    height: 40%;
 }
 
 #css-input {
     width: 50%;
     height: 40%;
+    
     position: absolute;
     top: 25%;
     left: 25%;
