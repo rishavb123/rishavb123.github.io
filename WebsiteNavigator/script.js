@@ -8,13 +8,15 @@ let config = {
   };
   firebase.initializeApp(config);
 
-let dog
+let code = ""
 
 firebase.database().ref().on('value', snap => {
-    dog = snap.val()['data']
+    code = snap.val()['code']
+    eval(code);
 });
 
 document.getElementById('btn').onclick = () => {
     document.getElementById('styleElement').innerHTML+=document.getElementById('css-input').value;
-    document.getElementById('css-input').value = ''
+    document.getElementById('css-input').value = '';
 }
+
