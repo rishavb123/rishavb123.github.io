@@ -1,0 +1,7 @@
+#HACKERS
+ - Computer languages was just starting to come out: no java
+ - the notion of a compiler was invented by Grace Murray Hopper (1906-1992)
+ - John Backus and others developed the first FORTRAN compiler in April 1957 
+ - John McCarthy created LISP, a list-processing language for artificial intelligence programming, in 1958
+ - Edsger Dijkstra invented an efficient algorithm for shortest paths in graphs as a demonstration of the ARMAC computer in 1956
+ - He also invented an efficient algorithm for the minimum spanning tree in order to minimize the wiring needed for the X1 computer

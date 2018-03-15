@@ -1,0 +1,99 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.nav {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: aqua
+}
+
+.nav-link:hover {
+    background-color: white;
+    color: black;
+}
+
+header {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+canvas {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+h1 {
+    color: white;
+    font-size: 500%;
+    background: linear-gradient(rgba(0, 0, 0, 0), black);
+}
+
+h2 {
+    text-align: center;
+    height: 20vh;
+    margin-top: 10vh;
+}
+
+h2:after {
+    display: block;
+    height: 3px;
+    background-color: #e68ae6;
+    content: " ";
+    width: 20vw;
+    margin: 0 auto;
+    margin-top: 4vh;
+}
+
+.des-img {
+    margin-top: 3vh;
+    width: 30vw;
+    margin-left: 35vw;
+}
+
+ul li {
+    font-size: 130%;
+    margin-left: 5vw;
+}
+
+#graph {
+    margin-top: 3vh;
+    width: 50vw;
+    margin-left: 25vw;
+}
+
+#evolution {
+    width: 95vw;
+    margin-left: 2.5vw;
+    margin-top: 3vh;
+}
+
+#hm {
+    width: 50vw;
+    margin-left: 25vw;
+    margin-top: 3vh;
+    display: inline-block;
+}
+
+h3 {
+    text-align: center;
+}
+
+#sort {
+    width: 80vw;
+    margin-left: 10vw;
+}

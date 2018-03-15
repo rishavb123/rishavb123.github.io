@@ -1,0 +1,7 @@
+#HACKERS, #SCHOOL
+- a hand-held pointing device that detects two-dimensional motion relative to a surface with a ball
+-  translated into the motion of a pointer on a display
+- smooth control of the graphical user interface
+- first public demonstration of a mouse controlling a computer system was in 1968
+- used a ball rolling on a surface to detect motion
+- image: url("https://www.computerhope.com/issues/pictures/first-mouse.jpg")
