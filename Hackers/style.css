@@ -3,6 +3,11 @@
     margin: 0;
 }
 
+body {
+    opacity: 1;
+    background-color: rgba(0,0,0,0);
+}
+
 .nav {
     width: 100vw;
     display: flex;
@@ -96,4 +101,11 @@ h3 {
 #sort {
     width: 80vw;
     margin-left: 10vw;
+}
+
+.hacked-content {
+    background-color: black;
+    display: none;
+    width: 100vw;
+    height: 100vh;
 }
