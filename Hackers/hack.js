@@ -2,7 +2,7 @@ const body = document.querySelector("body");
 const content = document.querySelector(".content");
 const hackedContent = document.querySelector(".hacked-content");
 const typer = document.getElementById('type');
-const hackedText = "Hi Rishav, I have finally broken through your firewalls. It took me a few hours but its done. I was getting close before, if you noticed those blackouts. Yup that was me, but anyways play the downloaded video. Its totally not a virus I am trying to install onto Q's computer and hack into his files and get things like this.";
+const hackedText = "Hi Rishav, I have finally broken through your firewalls. It took me a few hours but its done. I was getting close before, if you noticed those blackouts. Yup that was me, but anyways play the downloaded video ↓. Its totally not a virus I am trying to install onto Q's computer and hack into his files and get things like this.";
 
 let x=0;
 
@@ -11,6 +11,10 @@ function hack() {
     hackedContent.style.display = "block";
     
     type();
+    
+}
+
+function download() {
     
     document.getElementById('vidLink').click();
     
@@ -24,6 +28,8 @@ function unhack() {
 function type() {
     if(x < hackedText.length) {
         typer.innerHTML+=hackedText.charAt(x)
+        if(hackedText.charAt(x)=='↓')
+            download();
         x++;
         setTimeout(type, 10);
     } else {
@@ -52,7 +58,7 @@ window.addEventListener('keydown',() => {
         body.style.backgroundColor = "rgba(0,0,0,0)";
     }, 100);
     
-    throw "Security Warning, Cyber Attack on firewall"'
+    throw "Security Warning, Cyber Attack on firewall";
 });
 
 window.addEventListener('click',() => {
@@ -65,7 +71,7 @@ window.addEventListener('click',() => {
         body.style.backgroundColor = "rgba(0,0,0,0)";
     }, 100);
     
-    throw "Security Warning, Cyber Attack on firewall"'
+    throw "Security Warning, Cyber Attack on firewall";
 });
 
 
