@@ -48,6 +48,11 @@ h1 {
     background: linear-gradient(rgba(0, 0, 0, 0), black);
 }
 
+#type {
+    color: #0f0;
+    font-size: 200%;
+}
+
 h2 {
     text-align: center;
     height: 20vh;
