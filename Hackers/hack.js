@@ -48,7 +48,7 @@ function display() {
     document.getElementById('qImg').style.display = 'block';
 }
 
-window.addEventListener('keydown',() => {
+content.addEventListener('keydown',() => {
     
     body.style.opacity = "0";
     body.style.backgroundColor = "rgba(0,0,0,1)";
@@ -61,7 +61,7 @@ window.addEventListener('keydown',() => {
     throw "Security Warning, Cyber Attack on firewall";
 });
 
-window.addEventListener('click',() => {
+content.addEventListener('click',() => {
     
     body.style.opacity = "0";
     body.style.backgroundColor = "rgba(0,0,0,1)";
