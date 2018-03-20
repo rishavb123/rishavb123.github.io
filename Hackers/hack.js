@@ -2,7 +2,7 @@ const body = document.querySelector("body");
 const content = document.querySelector(".content");
 const hackedContent = document.querySelector(".hacked-content");
 const typer = document.getElementById('type');
-const hackedText = "Hi Rishav, I have finally broken through your firewalls. It took me a few hours but its done. I was getting close before, if you noticed those blackouts. Yup that was me, but anyways play the downloaded video ↓. Its totally not a virus I am trying to install onto Q's computer and hack into his files and get things like this.";
+const hackedText = "Hi Rishav, I have finally broken through your firewalls. It took me a few hours but its done. I was getting close before, if you noticed those blackouts. Yup that was me, but anyways play the downloaded video ↓. Its totally not a virus I am trying to install onto a SBHS computer and hack into the computer and get files like this.      ";
 
 let x=0;
 
