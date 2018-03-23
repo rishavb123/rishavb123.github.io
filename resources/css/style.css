@@ -32,6 +32,15 @@ h2:after {
     margin-top: 4vh;
 }
 
+.text {
+    font-family: 'Lato';
+    text-align: center;
+    font-size: 150%;
+    background: linear-gradient(white, rgba(161, 255, 194, 0.64), white);
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
 /* font */
 * {
     font-size: 96.5%;
@@ -92,6 +101,10 @@ header {
     align-self: center;
     position: absolute;
 }
+
+/*----------------------------About Me------------------------------------*/
+
+
 
 /*----------------------------Projects------------------------------------*/
 
