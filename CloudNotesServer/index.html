@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="queries.css" type="text/css">
+    <title>Cloud Notes</title>
+  </head>
+  <body>
+      
+      <div class="container log-in">
+        
+          <div class='holder' onclick="$('canvas').addClass('blur')">
+              
+              <h1 class='top-header primary'>Cloud Notes</h1>
+              
+              <h1 class='top-header secondary'>Log in or Sign up</h1>
+              
+              <input id="txtEmail" type = "email" placeholder="Email">
+
+              <input id="txtPassword" type = "password" placeholder="Password">
+              
+              <span class="warning hide">!</span><span id="error-output"></span>
+              
+              <div class='auth-buttons'>
+                  
+                  <button id="btnLogin" class="btn btn-primary">
+                    Log in
+                  </button>
+
+                  <button id="btnSignUp" class="btn btn-secondary">
+                    Sign Up
+                  </button>
+                  
+              </div>
+              
+              
+              
+          </div>
+          
+         <canvas id="canvas"></canvas>
+          
+      </div>
+      
+      <div class="main-app hide">
+          
+        <h1 class='page-title'>Cloud Notes</h1>
+        
+        <div class='search-holder'>
+            <input type="text" placeholder="Search" class='search-box' id="search-bar">
+            <button id="btnSearch" class='btn'>Search</button>
+        </div>
+            
+        <div class='notes-holder'>         
+            
+            <ul id="notes">
+                
+            </ul>
+          
+        </div>
+
+        <button id="btnLogout" class="btn"><h1>Log out</h1></button>
+          
+      </div>
+      
+      <div class='editor-wrapper hide'>
+        
+          <div class='editor' id='editor' data-index='-1'>
+            
+            <h1 class='editor-title'><input class='title-input' id="title-input" type='text'><button id='close' onclick="closeEditor()">X</button></h1>
+            <span class='editor-last-edited' id='editor-last-edited'></span>
+            <textarea id='updated-note'></textarea>
+            <div class="btn-group editor-btn-group">
+                
+                <button class='btn note-download' onclick='noteDownload()'>Download</button>
+                <button class='btn note-upload'><input type="file" id="file"><button onclick="noteUpload()" class="upload-btn btn">Upload</button></button>
+                <button class='btn note-delete' onclick='noteDelete()'>Delete Note</button>
+                
+              </div>
+          </div>
+          
+      </div>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+      <script src="canvas.js"></script>
+      <script src="FileSaver.js"></script>
+      <script src="app.js"></script>
+      
+  </body>
+</html>
