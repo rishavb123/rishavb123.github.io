@@ -110,13 +110,18 @@ header {
 
 #projects-container {
     width: 100%;
+    align-items: stretch;
+    justify-content: center;
+    display: flex;
+    background: linear-gradient(white, #d34e07);
+    flex-wrap: wrap;
 }
 
 .project-row {
     display:flex;
     align-items: stretch;
     justify-content: center;
-    background: linear-gradient(white, #d34e07);
+    background: repeating-linear-gradient(white, #d34e07 25%);
     padding-top: 5%;
     flex-wrap: wrap;
 }
@@ -125,6 +130,7 @@ header {
     display: inline-block;
     margin-right: 2%;
     min-width: 300px;
+    margin-top: 5%;
 }
 
 .buttons {
