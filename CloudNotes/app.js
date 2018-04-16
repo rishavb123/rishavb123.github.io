@@ -14,6 +14,8 @@ const btnLogin = document.getElementById('btnLogin');
 const btnSignUp = document.getElementById('btnSignUp');
 const btnLogout = document.getElementById('btnLogout');
 const errorOutput = document.getElementById('error-output');
+
+let full = false;
     
 function outputError(e) {
     errorOutput.innerHTML = e.message
@@ -146,6 +148,14 @@ function editor(index) {
     lastEditedArea.innerHTML =dbData["last-edited"];
     updatedNote.value = dbData["note"];
     
+}
+
+function fullScreen() {
+    if(!full)
+        $('.editor').addClass('full');
+    else
+        $('.editor').removeClass('full');
+    full = !full;
 }
 
 function noteDownload() {

@@ -15,8 +15,11 @@
     #close {
         width: 7%;
     }
+    #full {
+        width: 7%;
+    }
     .title-input {
-        width: 93%;
+        width: 86%;
     }
 }
 
@@ -24,16 +27,19 @@
     #close {
         width: 10%;
     }
+    #full {
+        display: none;
+    }
     .title-input {
         width: 90%;
     }
     
-    .note-upload, .upload-btn  {
+    .note-upload, .upload-btn, .note-delete  {
         display: none;
     }
     
-    .note-delete,.note-download{
-        width: 50%;
+    .note-download{
+        width: 100%;
     }
     
 }

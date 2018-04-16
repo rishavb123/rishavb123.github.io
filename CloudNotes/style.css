@@ -234,7 +234,7 @@ html,body {
 }
 
 .title-input {
-    width: 95%;
+    width: 90%;
     height: 15%;
     margin: 0;
     padding: 0;
@@ -248,16 +248,23 @@ html,body {
     padding: 0;
 }
 
-#close {
+#close, #full {
     width: 5%;
     margin: 0;
     padding: 0;
-    background-color: red;
     color: black;
     transition: color 1s;
 }
 
-#close:hover {
+#close {
+    background-color: red;
+}
+
+#full {
+    background-color: #28d156;
+}
+
+#close:hover, #full:hover {
     color: white;
 }
 
@@ -309,6 +316,14 @@ html,body {
     position: relative;
     bottom: 4vh;
     width: 25%;
+}
+
+.full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 .hide {
