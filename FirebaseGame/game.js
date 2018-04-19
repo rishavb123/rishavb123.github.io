@@ -42,10 +42,22 @@ addEventListener('resize', () => {
 addEventListener('keydown', e => {
     if(e.keyCode>=37 && e.keyCode<=40)
         player.direction = e.keyCode - 36;
-    else if(e.keyCode === 32)
+    else if(e.keyCode === 191)
         player.attack();
-    else if(e.keyCode === 66)
+    else if(e.keyCode === 186)
         player.build();
+    else if(e.keyCode == 87)
+        enemy.direction = 2;
+    else if(e.keyCode == 83)
+        enemy.direction = 4;
+    else if(e.keyCode == 65)
+        enemy.direction = 1;
+    else if(e.keyCode == 68)
+        enemy.direction = 3;
+    else if(e.keyCode === 81)
+        enemy.attack();
+    else if(e.keyCode === 49)
+        enemy.build();
 });
 
 let shakeEvent = new Shake({threshold: 10});
