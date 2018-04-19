@@ -17,7 +17,8 @@ firebase.database().ref().on("value", snap => {
 })
 
 function clicked() {
-    part+=1;
+    if(part!=8)
+        part+=1;
     part = part%8;
     firebase.database().ref().update({part: part});
 }
