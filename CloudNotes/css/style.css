@@ -42,7 +42,7 @@ html,body {
 
 .holder {
     padding: 20%;
-    background-image: url(log-in-background.jpg);
+    background-image: url(../imgs/log-in-background.jpg);
     background-size: cover;
     border-radius: 150px;
     width: 100%;
@@ -188,14 +188,14 @@ html,body {
 }
 
 .new-note {
-    background-image: url('plus.png');
+    background-image: url('../imgs/plus.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
 
 .new-note:hover {
-    background-image: url('plus.png');
+    background-image: url('../imgs/plus.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
