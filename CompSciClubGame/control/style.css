@@ -4,4 +4,6 @@
     left: 0;
     width: 100vw;
     height: 100vh;
+    font-size: 300%;
+    border-radius: 0;
 }
