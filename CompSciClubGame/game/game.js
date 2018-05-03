@@ -10,7 +10,6 @@ if(innerHeight>innerWidth) {
     canvas.height = innerHeight;
 }
 
-// Variables
 let mouse = {
 	x: 0,
     y: 0
@@ -39,26 +38,26 @@ addEventListener('resize', () => {
     }
 });
 
-addEventListener('keydown', e => {
-    if(e.keyCode>=37 && e.keyCode<=40)
-        player.direction = e.keyCode - 36;
-    else if(e.keyCode === 191)
-        player.attack();
-    else if(e.keyCode === 186)
-        player.build();
-    else if(e.keyCode == 87)
-        enemy.direction = 2;
-    else if(e.keyCode == 83)
-        enemy.direction = 4;
-    else if(e.keyCode == 65)
-        enemy.direction = 1;
-    else if(e.keyCode == 68)
-        enemy.direction = 3;
-    else if(e.keyCode === 81)
-        enemy.attack();
-    else if(e.keyCode === 49)
-        enemy.build();
-});
+//addEventListener('keydown', e => {
+//    if(e.keyCode>=37 && e.keyCode<=40)
+//        player.direction = e.keyCode - 36;
+//    else if(e.keyCode === 191)
+//        player.attack();
+//    else if(e.keyCode === 186)
+//        player.build();
+//    else if(e.keyCode == 87)
+//        enemy.direction = 2;
+//    else if(e.keyCode == 83)
+//        enemy.direction = 4;
+//    else if(e.keyCode == 65)
+//        enemy.direction = 1;
+//    else if(e.keyCode == 68)
+//        enemy.direction = 3;
+//    else if(e.keyCode === 81)
+//        enemy.attack();
+//    else if(e.keyCode === 49)
+//        enemy.build();
+//});
 
 let shakeEvent = new Shake({threshold: 10});
 shakeEvent.start();
@@ -302,11 +301,11 @@ function Block(sender, x, y) {
     }
     
     this.draw = function() {
-         c.fillStyle = this.color;
-        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,2*canvas.width/100,2*canvas.height/100);
+        c.fillStyle = this.color;
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,this.width*canvas.width/100,this.height*canvas.height/100);
         
         c.fillStyle = "rgba(0, 0, 0, 0.2)";
-        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,2 * canvas.width/100,2 * canvas.height/100);
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,this.width * canvas.width/100,this.height * canvas.height/100);
     }
     
 }
