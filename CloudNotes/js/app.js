@@ -219,6 +219,8 @@ let properResponses = ["yes","totally","yup","ya","imsure","ofcourse","whynot","
 function closeEditor() {
     $('.editor-wrapper').addClass('hide');
     $('.main-app').removeClass('blur');
+    full = true;
+    fullScreen();
 }
 
 function isIn(arr, item) {
