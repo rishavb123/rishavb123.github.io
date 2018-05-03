@@ -76,24 +76,7 @@ function Character(x, y, color) {
     this.lastDirection = 3;
     this.health = 100;
     this.color = color;
-    
-    this.getInfo = function() {
-        return {
-            x: this.x,
-            y: this.y,
-            direction: this.direction,
-            lastDirection: this.lastDirection,
-            health: this.health
-        }
-    }
-    
-    this.inpInfo = function(o) {
-        this.x = o.x;
-        this.y = o.y;
-        this.direction = o.direction;
-        this.lastDirection = o.lastDirection;
-        this.health = o.health;
-    }
+//    this.id = id;
     
     this.attack = function() {
         if(this.direction!=0)
