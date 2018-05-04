@@ -8,6 +8,7 @@ let config = {
 };
 firebase.initializeApp(config);
 let provider = new firebase.auth.GoogleAuthProvider();
+let data;
 
 function login() {
     firebase.auth().signInWithPopup(provider).catch(function(result) {
@@ -21,7 +22,11 @@ $('#up').mousedown(()=>{
     push('up');
 });
 
+firebase.database().ref("/game").on("value", snap => {
+    data = snap.val();
+})
+
 function push(s) {
     console.log(s);
-    window.open("../game/index.html");
+    firebase.database().ref("/game/"+/*firebase.auth().currentUser.uid*/"testid"+"/"+data[/*firebase.auth().currentUser.uid*/"testid"].length)
 }
