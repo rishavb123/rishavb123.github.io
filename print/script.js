@@ -41,9 +41,10 @@ function print() {
 }
 
 function push() {
-    let r = firebase.database().ref("/Print/jobs/1");
+    let r = firebase.database().ref("/Print/jobs/");
     console.log(obj);
-    r.set(obj);    
+    
+    r.child(1).set(obj);    
     console.log("done")
 }
 
