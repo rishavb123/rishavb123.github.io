@@ -85,6 +85,19 @@ function Character(x, y, color) {
             objs.push(new Bullet(this, this.x+.5,this.y+.5,this.lastDirection));
     }
     
+    this.heal = function() {
+        
+        this.health=100;
+        let spl = this.color.split(',');
+        spl[3] = (this.health/100.0).toString()+")";
+        this.color = "";
+        for(let x=0;x<spl.length-1;x++) {
+            this.color+=spl[x]+",";
+        }
+        this.color+=spl[spl.length-1];
+        
+    }
+    
     this.damage = function() {
         this.health-=10;
         let spl = this.color.split(',');
@@ -116,16 +129,16 @@ function Character(x, y, color) {
         switch(this.direction) {
                 
             case 1:
-                objs.push(new Block(this,this.x-2,this.y));
+                objs.push(new Block(this,this.x-this.width,this.y));
                 break;
             case 2:
-                objs.push(new Block(this,this.x,this.y-2));
+                objs.push(new Block(this,this.x,this.y-this.height));
                 break;
             case 3:
-                objs.push(new Block(this,this.x+2,this.y));
+                objs.push(new Block(this,this.x+this.width,this.y));
                 break;
             case 4:
-                objs.push(new Block(this,this.x,this.y+2));
+                objs.push(new Block(this,this.x,this.y+this.height));
                 break;
                 
         }
@@ -152,6 +165,12 @@ function Character(x, y, color) {
                 
         }
     }
+    
+    this.big = function() {
+        this.width+=2;
+        this.height+=2;
+    }
+    
     
     this.update = function() {
         
@@ -189,7 +208,7 @@ function Character(x, y, color) {
     this.draw = function() {
        
          c.fillStyle = this.color;
-        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,2*canvas.width/100,2*canvas.height/100);
+        c.fillRect(this.x*canvas.width/100,this.y*canvas.height/100,this.width*canvas.width/100,this.height*canvas.height/100);
     }
     
     this.getInfo = function() {

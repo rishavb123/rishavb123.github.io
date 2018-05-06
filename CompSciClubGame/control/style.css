@@ -59,3 +59,19 @@
 #shoot {
     right: 0
 }
+
+#heal {
+    left: 0;
+    top: -30%;
+    width: 25%;
+    height: 25%;
+    background-color: red;
+}
+
+#big {
+    right: 0;
+    top: -30%;
+    width: 25%;
+    height: 25%;
+    background-color: red;
+}
