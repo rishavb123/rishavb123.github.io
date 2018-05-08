@@ -14,7 +14,7 @@ function login() {
     firebase.auth().signInWithPopup(provider).then(function(result) {
         document.getElementById('login').style.display = 'none';
         document.getElementById('controller').style.display = 'block';
-        
+        consoel.log(firebase.auth().currentUser);
     })
 }
 
@@ -55,7 +55,5 @@ firebase.database().ref("/game").on("value", snap => {
     data = snap.val();
 })
 
-function push(s) {
-    console.log(s);
-    firebase.database().ref("/game/"+firebase.auth().currentUser.uid+"/"+data[/*firebase.auth().currentUser.uid*/"testid"].length).set(s);
+function push(s) {    firebase.database().ref("/game/"+firebase.auth().currentUser.uid+"/"+data[firebase.auth().currentUser.uid].length).set(s);
 }
