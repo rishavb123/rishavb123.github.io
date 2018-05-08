@@ -55,5 +55,10 @@ firebase.database().ref("/game").on("value", snap => {
     data = snap.val();
 })
 
-function push(s) {    firebase.database().ref("/game/"+firebase.auth().currentUser.uid+"/"+data[firebase.auth().currentUser.uid].length).set(s);
+function push(s) { 
+   
+   let h = 0;
+    if(data[firebase.auth().currentUser.uid]!=null)
+       h=data[firebase.auth().currentUser.uid].length
+    firebase.database().ref("/game/"+firebase.auth().currentUser.uid+"/"+h).set(s);
 }
