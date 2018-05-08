@@ -1,9 +1,9 @@
-let config = {
+var config = {
     apiKey: "AIzaSyAAmdIbaOZWJJf-vXSPaCSPGXscl72T6cM",
     authDomain: "fir-99747.firebaseapp.com",
     databaseURL: "https://fir-99747.firebaseio.com",
     projectId: "fir-99747",
-    storageBucket: "",
+    storageBucket: "fir-99747.appspot.com",
     messagingSenderId: "156319699888"
 };
 firebase.initializeApp(config);
@@ -11,7 +11,7 @@ let provider = new firebase.auth.GoogleAuthProvider();
 let data;
 
 function login() {
-    firebase.auth().signInWithPopup(provider).catch(function(result) {
+    firebase.auth().signInWithPopup(provider).then(function(result) {
         document.getElementById('login').style.display = 'none';
         document.getElementById('controller').style.display = 'block';
         
@@ -22,7 +22,6 @@ $('#up').mousedown(()=>{
     push('up');
 });
 
-<<<<<<< HEAD
 $('#down').mousedown(()=>{
     push('down');
 });
@@ -58,5 +57,5 @@ firebase.database().ref("/game").on("value", snap => {
 
 function push(s) {
     console.log(s);
-    firebase.database().ref("/game/"+/*firebase.auth().currentUser.uid*/"testid"+"/"+data[/*firebase.auth().currentUser.uid*/"testid"].length)
+    firebase.database().ref("/game/"+firebase.auth().currentUser.uid+"/"+data[/*firebase.auth().currentUser.uid*/"testid"].length).set(s);
 }
