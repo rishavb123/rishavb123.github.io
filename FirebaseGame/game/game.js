@@ -1,3 +1,13 @@
+var config = {
+    apiKey: "AIzaSyAAmdIbaOZWJJf-vXSPaCSPGXscl72T6cM",
+    authDomain: "fir-99747.firebaseapp.com",
+    databaseURL: "https://fir-99747.firebaseio.com",
+    projectId: "fir-99747",
+    storageBucket: "fir-99747.appspot.com",
+    messagingSenderId: "156319699888"
+};
+firebase.initializeApp(config);
+
 // Setup
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
@@ -15,11 +25,12 @@ let mouse = {
     y: 0
 };
 
-let player = new Character(20, 20,'rgba(0,0,255,1)');
-let enemy = new Character(80,20,'rgba(255,0,0,1)')
+//let player = new Character(20, 20,'rgba(0,0,255,1)');
+//let enemy = new Character(80,20,'rgba(255,0,0,1)')
 let objs = [];
 let angle = 0;
 let turning = 0;
+let data
 
 
 // Event Listeners
@@ -37,6 +48,10 @@ addEventListener('resize', () => {
         canvas.height = innerHeight;
     }
 });
+
+firebase.database().ref("game").on("value", snap => {
+    data = snap.val();
+})
 
 //addEventListener('keydown', e => {
 //    if(e.keyCode>=37 && e.keyCode<=40)
@@ -67,7 +82,7 @@ window.addEventListener('shake', function(){
 
 //"Classes"
 
-function Character(x, y, color) {
+function Character(x, y, color, id) {
     this.x = x;
     this.y = y;
     this.width = 2;
@@ -76,7 +91,7 @@ function Character(x, y, color) {
     this.lastDirection = 3;
     this.health = 100;
     this.color = color;
-//    this.id = id;
+    this.id = id;
     
     this.attack = function() {
         if(this.direction!=0)
@@ -318,9 +333,27 @@ function gameOver() {
     console.log("Game over u lose");
 }
 
+function isIn(arr, target) {
+    for(let i in arr)
+        if(arr[i]==target)
+           return true;
+    return false;
+}
+
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
+    
+    let ids = [];
+    
+    for(let obj in objs)
+        if(objs[obj] instanceof Character) {
+            ids.push(objs[obj].id);
+        }
+    
+    for(let x in data)
+        if(!isIn(ids, x))
+            objs.push(new Character(Math.random()*100, Math.random()*100, "#ff0000", x));
     
     if(turning>0.001) {
         angle+=10;
@@ -348,15 +381,15 @@ function animate() {
                 objs.splice(obj, 1);
         }
                 
-    if(!player.update())
-        gameOver();
-    if(player.x>100 || player.x<0 || player.y>100 || player.y<0)
-        player.hurt();
-    
-    if(!enemy.update())
-        gameOver();
-    if(enemy.x>100 || enemy.x<0 || enemy.y>100 || enemy.y<0)
-        enemy.hurt();
+//    if(!player.update())
+//        gameOver();
+//    if(player.x>100 || player.x<0 || player.y>100 || player.y<0)
+//        player.hurt();
+//    
+//    if(!enemy.update())
+//        gameOver();
+//    if(enemy.x>100 || enemy.x<0 || enemy.y>100 || enemy.y<0)
+//        enemy.hurt();
     
     
     for(let obj in objs)
