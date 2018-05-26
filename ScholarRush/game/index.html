@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <title>Firebase Game</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        
+    </head>
+    
+    <body>
+
+        
+        <div class="content">
+            
+            <div id="questions">
+                
+                <h1 id="question">Question?</h1>
+                <ul>
+                    <li>A: <span id="A">answers A</span></li>   
+                    <li>B: <span id="B">answers B</span></li>   
+                    <li>C: <span id="C">answers C</span></li>   
+                    <li>D: <span id="D">answers D</span></li>   
+                </ul>
+                
+            </div>
+            
+            <div id="game" class="hide">
+                <canvas onclick="init()" id="game-container"></canvas>
+            </div>
+            
+            <div id="leaderboard" class="hide">
+                <h1>Leaderboard</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="row">Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                
+        </div>    
+    
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+        <script src='game.js' type="text/javascript"></script>
+        
+        
+    </body>
+    
+</html>

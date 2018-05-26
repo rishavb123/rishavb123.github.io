@@ -68,16 +68,16 @@ function Character(x, y, color, attacker, id) {
         switch(this.direction) {
         
             case 1:
-                this.x--;
+                this.x-=0.5;
                 break;
             case 2:
-                this.y--;
+                this.y-=0.5;
                 break;
             case 3:
-                this.x++;
+                this.x+=0.5;
                 break;
             case 4:
-                this.y++;
+                this.y+=0.5;
                 break;
                 
         }
@@ -102,13 +102,28 @@ function Character(x, y, color, attacker, id) {
 
         }
         
-        if(data.games[0][this.id].attacking && this.count%10==0)
+        if(data.games[0][this.id].attacking && this.count%10==0 && this.attacker)
             this.attack();
         
         if(this.direction!=0)
             this.lastDirection = this.direction;
         
-        switch(firebase)
+        switch(data.games[0][this.id].direction) {
+            case "UP":
+                this.direction = 2;
+                break;
+            case "DOWN":
+                this.direction = 4;
+                break;
+            case "RIGHT":
+                this.direction = 3;
+                break;
+            case "LEFT":
+                this.direction = 1;
+                break;
+            default:
+                this.stop();
+        }
         
         this.draw();
         return true;
@@ -163,7 +178,11 @@ function Bullet(sender, x, y, direction) {
 }
 
 function animate() {
-    requestAnimationFrame(animate);
+    if(going)
+        requestAnimationFrame(animate);
+    co++;
+    if(co>1800)
+        stop();
     c.clearRect(0, 0, canvas.width, canvas.height);
     
     let ids = [];
@@ -176,7 +195,7 @@ function animate() {
     if(Object.keys(data).length != 0)
         for(let x in data.games[0])
             if(!isIn(ids, x)) {
-                objs.push(new Character(Math.random()*100, Math.random()*100, data.games[0][x].color, true, x));
+                objs.push(new Character(Math.random()*100, Math.random()*100, data.games[0][x].color, data.games[0][x].status==="attacker", x));
             }
     
     for(let obj in objs)
@@ -195,9 +214,77 @@ function animate() {
         if(objs[obj] instanceof Character) {
             objs[obj].update();
             if(objs[obj].x>100 || objs[obj].x<0 || objs[obj].y>100 || objs[obj].y<0)
-                objs[objs].damage();
+                objs[obj].damage();
     }
                 
 }
+let going = false;
+function init() {
+    going = true;
+    co = 0;
+    objs = [];
+    firebase.database().ref().child("part").set(1);
+    $("#questions").addClass("hide");
+    $("#game").removeClass("hide");
+    animate();
+}
 
-animate();
+function stop() {
+    going = false;
+    reset();
+    $("#questions").addClass("hide");
+    $("#game").removeClass("hide");
+    firebase.database().ref().child("part").set(0);
+    if(cq<4)
+        moveUp()
+}
+
+function reset() {
+    for(let x in data.games[0])
+        firebase.database().ref("games/0/"+x+"/answer").set("0");
+}
+
+function everyoneAnswered() {
+    for(let x in data.games[0])
+        if(data.games[0][x].answer=="0")
+            return false;
+    return true;
+}
+
+function loadQuestion(i) {
+    let questions = data['questions'];
+    document.getElementById("question").innerHTML = questions[i].question;
+    
+    document.getElementById("A").innerHTML = questions[i].options["A"];
+    document.getElementById("B").innerHTML = questions[i].options["B"];
+    document.getElementById("C").innerHTML = questions[i].options["C"];
+    document.getElementById("D").innerHTML = questions[i].options["D"];
+}
+
+let cq = -1;
+let co = 0;
+firebase.database().ref().child("cq").set(cq);
+
+firebase.database().ref().once("value", snap => {
+    data = snap.val();
+    start();
+});
+
+function moveUp() {
+    cq++;
+    loadQuestion(cq);
+    firebase.database().ref().child("cq").set(cq);
+    setInterval(check(), 1000);
+    
+}
+
+function check() {
+    if(everyoneAnswered()) {
+        clearInterval();
+        init();
+    }
+}
+
+function start() {
+    moveUp()
+}
