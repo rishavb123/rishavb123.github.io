@@ -69,23 +69,23 @@ nav {
 
 /*Main Content*/
 
-header {    
+header {
     height: 100vh;
     width: 100%;
-        
+
     background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url(css-imgs/headerBackground.jpg);
-    
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
+
     background-size: cover;
-    
+
     background-attachment: fixed;
-    
+
     display: flex;
     justify-content: center;
-    
+
 }
 
 #headerText{
@@ -293,7 +293,3 @@ header {
 .hide {
     display: none;
 }
-
-
-
-
