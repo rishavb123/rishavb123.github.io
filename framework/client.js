@@ -1,4 +1,4 @@
 //Make connection
-let socket = io.connect('http://73.178.142.232:3000');
+let socket = io.connect('http://192.168.137.1:3000');
 
 socket.emit('type', "player");
